@@ -1,5 +1,5 @@
 /*
-Pr·ctica 5: OptimizaciÛn y Carga de Modelos
+Pr√°ctica 5: Optimizaci√≥n y Carga de Modelos
 */
 //para cargar imagen
 #define STB_IMAGE_IMPLEMENTATION
@@ -198,7 +198,7 @@ int main()
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
 		meshList[2]->RenderMesh();
 
-		//------------*INICIA DIBUJO DE NUESTROS DEM¡S OBJETOS-------------------*
+		//------------*INICIA DIBUJO DE NUESTROS DEM√ÅS OBJETOS-------------------*
 		//Coche
 
 		GLfloat traslacion = mainWindow.getTraslacionCoche();
