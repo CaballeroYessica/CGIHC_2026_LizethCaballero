@@ -49,7 +49,6 @@ Texture pisoTexture;
 Texture AgaveTexture;
 
 Model Coche_M;
-//Model kitt_M;
 Model LlantaI_M;
 Model LlantaD_M;
 Model Blackhawk_M;
@@ -219,8 +218,6 @@ int main()
 
 	Coche_M = Model();
 	Coche_M.LoadModel("Models/carro.obj");
-	//kitt_M = Model();
-	//kitt_M.LoadModel("Models/kitt_optimizado.obj");
 	LlantaI_M = Model();
 	LlantaI_M.LoadModel("Models/llantaI.obj");
 	LlantaD_M = Model();
@@ -230,7 +227,7 @@ int main()
 	parabrisas_M = Model();
 	parabrisas_M.LoadModel("Models/parabrisas.obj");
 	cofre_M = Model();
-	cofre_M.LoadModel("Models/cofre2.obj");
+	cofre_M.LoadModel("Models/cofre.obj");
 	parrilla_M = Model();
 	parrilla_M.LoadModel("Models/parrilla.obj");
 	
@@ -281,11 +278,11 @@ int main()
 		15.0f);
 	spotLightCount++;
 	
-	//se crean mas luces puntuales y spotlight 
+	//se crean mas luces puntuales y spotlight
 	spotLights[2] = SpotLight(0.0f, 0.0f, 0.8f,
 		1.0f, 1.0f,
-		0.0f, 0.0f, 0.0f,        // Posición temporal
-		0.0f, 0.0f, -1.0f,       // Dirección temporal  
+		0.0f, 0.0f, 0.0f,        
+		0.0f, 0.0f, -1.0f,       
 		1.0f, 0.0f, 0.0f,
 		20.0f);
 	spotLightCount++;
@@ -334,9 +331,8 @@ int main()
 		lowerLight.y -= 0.3f;
 		spotLights[0].SetFlash(lowerLight, camera.getCameraDirection());
 
-		//FAROOOO
-
-		glm::vec3 carLightPosition = glm::vec3(9.0f + mainWindow.getmuevex(), 1.2f, 0.0f);
+		//FARO
+		glm::vec3 carLightPosition = glm::vec3(9.0f + mainWindow.getmuevex(), 1.25f, 0.0f);
 		carLightPosition = carLightPosition + glm::vec3(-6.0f, -0.7f, -2.2f);
 		glm::vec3 carLightDirection = glm::vec3(-1.0f, 0.0f, 0.0f);
 		spotLights[2].SetFlash(carLightPosition, carLightDirection);
@@ -365,10 +361,9 @@ int main()
 
 		//Instancia del coche 
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(9.0f + mainWindow.getmuevex(), 1.2f, 0.0f));
+		model = glm::translate(model, glm::vec3(9.0f + mainWindow.getmuevex(), 1.25f, 0.0f));
 		modelaux = model;
 		model = glm::scale(model, glm::vec3(1.6f, 1.6f, 1.6f));
-		//model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));
 		model = glm::rotate(model, -180 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Coche_M.RenderModel();
@@ -378,7 +373,6 @@ int main()
 		//Llanta delantera izquierda
 		model = modelaux;
 		model = glm::translate(model, glm::vec3(-3.8f, -1.3f, -2.5f));
-		//model = glm::rotate(model, -180 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(1.4f, 1.4f, 1.4f));
 		color = glm::vec3(0.5f, 0.5f, 0.5f);//llanta con color gris
 		glUniform3fv(uniformColor, 1, glm::value_ptr(color));
@@ -388,7 +382,6 @@ int main()
 		//Llanta trasera izquierda
 		model = modelaux;
 		model = glm::translate(model, glm::vec3(4.8f, -1.3f, -2.5f));
-		//model = glm::rotate(model, -180 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(1.4f, 1.4f, 1.4f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		LlantaI_M.RenderModel();
@@ -396,7 +389,6 @@ int main()
 		//Llanta delantera derecha
 		model = modelaux;
 		model = glm::translate(model, glm::vec3(-3.8f, -1.3f, 2.5f));
-		//model = glm::rotate(model, 180 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(1.4f, 1.4f, 1.4f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		LlantaD_M.RenderModel();
@@ -404,7 +396,6 @@ int main()
 		//Llanta trasera derecha
 		model = modelaux;
 		model = glm::translate(model, glm::vec3(4.8f, -1.3f, 2.5f));
-		//model = glm::rotate(model, -180 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(1.4f, 1.4f, 1.4f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		LlantaD_M.RenderModel();
@@ -412,7 +403,6 @@ int main()
 		//Parabrisas
 		model = modelaux;
 		model = glm::translate(model, glm::vec3(-2.48f, 0.7f, 0.0f));
-		//model = glm::rotate(model, 180 * toRadians, glm::vec3(0.f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(1.645f, 1.645f, 1.645f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		parabrisas_M.RenderModel();
